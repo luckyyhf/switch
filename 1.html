@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css.css">
+    <script src="jquery-1.11.2.min.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <input type="hidden" value="1" id="firstNav">
+        <input type="hidden" value="1-1" id="subNav">
+        <ul class="list">
+            <li class="active" data-id="1">
+                标题1
+            </li>
+            <li data-id="2">
+                标题2
+            </li>
+        </ul>
+        <div class="subBox">
+            <ul class="list1" data-id="1">
+                <li class="active" data-id="1-1">
+                    标题1-1
+                </li>
+                <li data-id="1-2">
+                    标题1-2
+                </li>
+            </ul>
+            <ul class="list2 none" data-id="2">
+                <li class="active" data-id="2-1">
+                    标题2-1
+                </li>
+                <li data-id="2-2">
+                    标题2-2
+                </li>
+                <li data-id="2-3">
+                    标题2-3
+                </li>
+            </ul>
+        </div>
+        <div class="content content1-1">1-1</div>
+        <div class="content content1-2 blue none">1-2</div>
+        <div class="content content2-1 green none">2-1</div>
+        <div class="content content2-2 black none">2-2</div>
+        <div class="content content2-3 orange none">2-3</div>
+    </div>
+</body>
+<script>
+    $(function () {
+        $('.list').find('li').on('mouseenter',function () {
+            $(this).addClass('active').siblings().removeClass('active');
+            var id = $(this).attr("data-id");
+            $('.subBox').find('ul').addClass('none');
+            $('.subBox').find('ul[data-id='+id+']').removeClass('none').find('li').removeClass('active').eq(0).addClass('active');
+            $('.content').addClass('none');
+            $('.content'+id+'-1').removeClass('none');
+        });
+        $('.subBox ul').find('li').on('mouseenter',function () {
+            $(this).addClass('active').siblings().removeClass('active');
+            var id = $(this).attr("data-id");
+            $('.content').addClass('none');
+            $('.content'+id).removeClass('none');
+        })
+    })
+</script>
+</html>
